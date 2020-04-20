@@ -1,6 +1,9 @@
-/* Script to store keys */
+/* Script to store settings and keys. */
 
-var sheetID = 'Your-Sheet-ID';
-var telegramToken = 'Your-Telegram-Bot-Token';
-var telegramUrl = 'https://api.telegram.org/bot' + telegramToken + '/';
-var webAppUrl = '';
+var kety = {};
+kety.telegram_token = 'Your-Telegram-Bot-Token';
+kety.telegram_url = 'https://api.telegram.org/bot' + kety.telegram_token + '/';
+kety.webapp_url = 'Your-WebApp-Url';
+kety.ss = SpreadsheetApp.openById('Your-Sheet-ID');
+kety.codex = kety.ss.getSheetByName('Library');
+kety.logs = kety.ss.getSheetByName('Logs');

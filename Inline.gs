@@ -1,4 +1,4 @@
-/* Script for inline query functions */
+/* Script for inline query functions. */
 
 function myFunction() {
   

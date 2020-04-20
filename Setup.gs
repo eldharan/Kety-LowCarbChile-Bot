@@ -1,49 +1,31 @@
-/* Script for setup Webhook and initial configuration */
+/* Script for basic initial configuration and setup Webhook. */
 
 function getMe(){
-  var url = telegramUrl + 'getMe';
+  // Connect our bot to Telegram bots API. https://core.telegram.org/bots/api#making-requests
+  var url = kety.telegram_url + 'getMe';
   var response = UrlFetchApp.fetch(url);
   Logger.log(response.getContentText());
 }
 
+function doGet(obj){
+  // Listener for get method of this Google WebApp, obj is the input request.
+  return HtmlService.createHtmlOutput('How you doin? ' + JSON.stringify(obj));
+}
+
 function setWebhook(){
-  var url = telegramUrl + 'setWebhook?url=' + webAppUrl;
-  var response = UrlFetchApp.fetch(url);
+  // Register this Google WebApp as our Telegram bot Webhook. https://core.telegram.org/bots/api#setwebhook
+  var options = {
+    'method': 'post',
+    'contentType': 'application/json',
+    'payload': JSON.stringify({'url': kety.webapp_url})
+  };
+  var response = UrlFetchApp.fetch(kety.telegram_url + 'setWebhook', options);
   Logger.log(response.getContentText());
 }
 
 /*
 function scheduler(){
+  // Register trigger for this Google WebApp, based on time rules.
   ScriptApp.newTrigger('fetchIGPosts').timeBased().everyDays(1).atHour(9).nearMinute(10).create();
 }
-
-
-function sendText(id, text){
-  var url = telegramUrl + 'sendMessage?chat_id=' + id + '&text=' + text;
-  var response = UrlFetchApp.fetch(url);
-  Logger.log(response.getContentText());
-}
-
-function doGet(e){
-  return HtmlService.createHtmlOutput('Hi there');
-}
-
-function doPost(e){
-  // this is where telegram works
-  var data = JSON.parse(e.postData.contents);
-  var text = data.message.text;
-  var id = data.message.chat.id;
-  var name = data.message.chat.first_name + ' ' + data.message.chat.last_name;
-  var answer = 'Hi ' + name + ', thank you for your comment ' + text;
-  sendText(id,answer);
-  SpreadsheetApp.openById(ssId).getSheets()[0].appendRow([new Date(),id,name,text,answer]);
-  
-  if(/^@/.test(text)) {
-    var sheetName = text.slice(1).split(' ')[0];
-    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
-    var comment = text.split(' ').slice(1).join(' ');
-    sheet.appendRow([new Date(),id,name,comment,answer]);
-  }
-}
-
 */
