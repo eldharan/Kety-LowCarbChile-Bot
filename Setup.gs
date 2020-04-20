@@ -4,7 +4,7 @@ function getMe(){
   // Connect our bot to Telegram bots API. https://core.telegram.org/bots/api#making-requests
   var url = kety.telegram_url + 'getMe';
   var response = UrlFetchApp.fetch(url);
-  Logger.log(response.getContentText());
+  console.log(response.getContentText());
 }
 
 function doGet(obj){
@@ -13,11 +13,11 @@ function doGet(obj){
 }
 
 kety.sendResponse = function(method_name, reply_obj){
-  // Send and return a response to Telegram Bot API, method_name is the method to be called and reply_obj is the object with parameters.
+  // Generic function to send and return a response to Telegram Bot API, method_name is the method to be called and reply_obj is the object with parameters.
   var options = {
     'method': 'post',
     'contentType': 'application/json',
-    'payload': JSON.stringify(reply_obj)
+    'payload': JSON.stringify(reply_obj),
   };
   var response = UrlFetchApp.fetch(kety.telegram_url + method_name, options);
   return response;
@@ -26,12 +26,11 @@ kety.sendResponse = function(method_name, reply_obj){
 function setWebhook(){
   // Register this Google WebApp as our Telegram bot Webhook. https://core.telegram.org/bots/api#setwebhook
   var response = kety.sendResponse('setWebhook', {'url': kety.webapp_url});
-  Logger.log(response.getContentText());
+  console.log(response.getContentText());
 }
 
-/*
-function scheduler(){
-  // Register trigger for this Google WebApp, based on time rules.
-  ScriptApp.newTrigger('fetchIGPosts').timeBased().everyDays(1).atHour(9).nearMinute(10).create();
+function deleteWebhook(){
+  // Remove this Google WebApp as our Telegram bot Webhook. https://core.telegram.org/bots/api#deletewebhook
+  var response = kety.sendResponse('deleteWebhook', {});
+  console.log(response.getContentText());
 }
-*/
