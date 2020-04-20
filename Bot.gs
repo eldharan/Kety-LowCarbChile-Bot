@@ -5,31 +5,33 @@ function doPost(obj){
   if (obj.postData.type == 'application/json'){
     var data = JSON.parse(obj.postData.contents);
     if (data.hasOwnProperty('inline_query')){
-      answerInlineQuery(data.inline_query, data);
+      inline.answerInlineQuery(data.inline_query, data);
     }
-    else if (data.chat.type != 'supergroup'){
+    else {
       var text = data.message.text;
       if (/^\/?start ?/gmi.test(text)){
-        start(data)
+        bot.startMsg(data);
         // TODO: Crear comando de preguntas
         // TODO: Responder memes - palmitos
         // TODO: Crear comando para guardar un artículo o post
         // TODO: Programar una tarea que haga fetch a los posts de IG oficial, IG de Josefina y Blog
       }
       else {
-        unknownCommand(text, data);
+        bot.unknownCommand(text, data);
       }
     }
   }
 }
 
-function saveLog(kind, text, data, extras){
+var bot = {};
+
+bot.saveLog = function(kind, text, data, extras){
   // Save a log entry in spreadsheet.
   var row = [new Date(), kind, text, data.message.chat.id, JSON.stringify(data), extras || ''];
   kety.logs.appendRow(row);
 }
 
-function unknownCommand(text, data){
+bot.unknownCommand = function(text, data){
   // Send unknown command default response.
   saveLog('Comando desconocido', text, data);
   var reply = {
@@ -38,26 +40,16 @@ function unknownCommand(text, data){
     'parse_mode': 'Markdown',
     'disable_web_page_preview': true
   };
-  var options = {
-    'method': 'post',
-    'contentType': 'application/json',
-    'payload': JSON.stringify(reply)
-  };
-  var response = UrlFetchApp.fetch(kety.telegram_url + 'sendMessage', options);
+  var response = kety.sendResponse('sendMessage', reply);
 }
 
-function start(data){
+bot.startMsg = function(data){
   // Send response to start message, data is the json contents. https://core.telegram.org/bots/api#sendmessage
   var reply = {
     'chat_id': data.message.chat.id,
-    'text': '<b>Hola ' + data.message.chat.first_name + ' ' + data.message.chat.last_name + '</b>, ¿En que te puedo ayudar <i>hoy</i>?',
+    'text': '<b>Hola ' + data.message.chat.first_name + ' ' + data.message.chat.last_name + '</b>, ¿En que te puedo ayudar hoy?',
     'parse_mode': 'HTML',
     'disable_web_page_preview': true
   };
-  var options = {
-    'method': 'post',
-    'contentType': 'application/json',
-    'payload': JSON.stringify(reply)
-  };
-  var response = UrlFetchApp.fetch(kety.telegram_url + 'sendMessage', options);
+  var response = kety.sendResponse('sendMessage', reply);
 }

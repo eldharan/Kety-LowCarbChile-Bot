@@ -1,9 +1,12 @@
 /* Script for inline query functions. */
 
-function answerInlineQuery(iq, data){
+var inline = {};
+
+inline.answerInlineQuery = function(iq, data){
   // Answer inline query with suggested responses. https://core.telegram.org/bots/api#inline-mode
   var results = [];
-  var query = iq.query;
+  Logger.log(data);
+  // var query = iq.query;
   // TODO: Search results in spreadsheet  https://stackoverflow.com/questions/18482143/search-spreadsheet-by-column-return-rows
   // TODO: Send images  https://unnikked.ga/handling-multimedia-files-via-telegram-bots-api-abe3ed450c69
   // TODO: Send other result types  https://core.telegram.org/bots/api#inlinequeryresult
@@ -31,17 +34,11 @@ function answerInlineQuery(iq, data){
     }
   });
   // Save log and send results as responses
-  saveLog('Inline Query', iq.query, data, 'Resultados:' + results.length);
+  // saveLog('Inline Query', iq.query, data, 'Resultados:' + results.length);
   var reply = {
     'inline_query_id': iq.id,
     'results': results
   };
   // if (results.length > 50) reply.next_offset = '2';
-  var options = {
-    'method': 'post',
-    'contentType': 'application/json',
-    'payload': JSON.stringify(reply)
-  };
-  var response = UrlFetchApp.fetch(kety.telegram_url + 'answerInlineQuery', options);
+  var response = kety.sendResponse('answerInlineQuery', reply);
 }
-

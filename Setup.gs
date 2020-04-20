@@ -12,14 +12,20 @@ function doGet(obj){
   return HtmlService.createHtmlOutput('How you doin? ' + JSON.stringify(obj));
 }
 
-function setWebhook(){
-  // Register this Google WebApp as our Telegram bot Webhook. https://core.telegram.org/bots/api#setwebhook
+kety.sendResponse = function(method_name, reply_obj){
+  // Send and return a response to Telegram Bot API, method_name is the method to be called and reply_obj is the object with parameters.
   var options = {
     'method': 'post',
     'contentType': 'application/json',
-    'payload': JSON.stringify({'url': kety.webapp_url})
+    'payload': JSON.stringify(reply_obj)
   };
-  var response = UrlFetchApp.fetch(kety.telegram_url + 'setWebhook', options);
+  var response = UrlFetchApp.fetch(kety.telegram_url + method_name, options);
+  return response;
+}
+
+function setWebhook(){
+  // Register this Google WebApp as our Telegram bot Webhook. https://core.telegram.org/bots/api#setwebhook
+  var response = kety.sendResponse('setWebhook', {'url': kety.webapp_url});
   Logger.log(response.getContentText());
 }
 
