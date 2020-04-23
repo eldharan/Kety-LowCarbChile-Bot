@@ -8,7 +8,7 @@ inline.serializedObject = function(headers, row_index){
   var tmp = {};
   for (var i = 0; i < headers.length; i++) tmp[headers[i]] = row[i];
   var obj = {
-    'id': tmp.id,
+    'id': ''+tmp.id,
     'type': tmp.type,
     'title': tmp.title,
     'description': tmp.description,
@@ -50,7 +50,7 @@ inline.answerInlineQuery = function(data){
   var index = 0; // Finish as total matches.
   var offset = 0; // Page number starting from 0.
   if (query){
-    var search = kety.codex.getRange(2, 10, kety.codex.getLastRow(), 11).createTextFinder(query).matchCase(false).ignoreDiacritics(true);
+    var search = kety.codex.getRange(2, 11, kety.codex.getLastRow(), 11).createTextFinder(query).matchCase(false).ignoreDiacritics(true);
     var match = search.findNext();
     if (data.inline_query.offset){
       offset = parseInt(data.inline_query.offset);
@@ -258,7 +258,7 @@ function testInlineQuery(){
         "username": "ketytest",
         "language_code": "es"
       },
-      "query": "holi",
+      "query": "magnesio",
       "offset": ""
     }
   };
