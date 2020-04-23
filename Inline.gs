@@ -17,7 +17,7 @@ inline.serializedObject = function(headers, row_index){
     obj.url = tmp.url;
     obj.thumb_url = tmp.thumb_url;
     obj.input_message_content = {
-      'message_text': tmp.title + '\n' + kety.escapeMarkdown(tmp.url),
+      'message_text': tmp.title + (tmp.source == 'text' ? '\n\n' : '\n') + kety.escapeMarkdown(tmp.url),
       'parse_mode': 'Markdown',
     };
   }
@@ -83,10 +83,10 @@ inline.exampleResponseTypes = function(){
   // InlineQueryResultCachedDocument, Documento de Telegram con el file_id.
   results.push({
     'type': 'document',
-    'title': 'Instrucciones para novatos LCCL',
+    'title': 'Instrucciones para novatos en Low Carb Chile',
     'description': 'Documento de Telegram',
     'document_file_id': 'BQACAgEAAxkBAAO6XqEOEN6oOvDToTYi1yDkhfNXr_cAApQAA4OeCUWuPO1I4rSwzhgE',
-    'caption': 'Instrucciones para novatos LCCL',
+    'caption': 'Instrucciones para novatos en Low Carb Chile',
     'parse_mode': 'Markdown',
     'id': '1',
   });
