@@ -1,15 +1,19 @@
 # Kety-LowCarbChile-Bot
 
 Programming code in Google Apps Scripts (GAS) for **Kety**, the [Telegram Bot](https://t.me/lowcarbchilebot) of **[Low Carb Chile](https://www.lowcarbchile.com)** foundation and community.
+
 Kety is an interactive virtual assistant to help you with frequently asked questions and search information about keto and low carb within Telegram chats and groups, for now it only does inline searches suggesting web articles, YouTube videos, Instagram posts and documents or images inside Telegram.
+
 It started using a Google Spreadsheet as searching library but we reached a timeout limitation for Telegram Bot API and the queries were super slow, so we decided to use a JSON file in Google Drive instead.
+
 
 ## Files description:
 
 - ***[Config.gs](Config.gs)*** Private configuration file for settings and keys, the values must be changed for your own.
 - ***[Setup.gs](Setup.gs)*** WebApp basic functions and webhook initial configuration.
 - ***[Tasks.gs](Tasks.gs)*** Scheduled tasks and maintenance for groups in Telegram.
-- ***[TelegramBot.gs](TelegramBot.gs)*** Main script for bot interactions, with specific sections: generic, JSON file handlers, inline queries and private chat.
+- ***[TelegramBot.gs](TelegramBot.gs)*** Main script for bot interactions, with specific sections: generic, files, inline queries and private chat.
+
 
 ### Deployment on Google Script, do this every time you want to publish changes:
 
@@ -19,6 +23,7 @@ It started using a Google Spreadsheet as searching library but we reached a time
 4. Run _setWebhook()_ function from [Setup.gs](Setup.gs).
 5. Test for applied changes on Telegram.
 
+
 ## Details of parameters used in JSON file for inline searches:
 
 This is based on Telegram Bot API [InlineQueryResult](https://core.telegram.org/bots/api#inlinequeryresult) types and required keys, which is serialized in [TelegramBot.gs](TelegramBot.gs).
@@ -26,17 +31,18 @@ This is based on Telegram Bot API [InlineQueryResult](https://core.telegram.org/
 | Key | Type | Description |
 | --- | --- | --- |
 | `id` | String | Unique identifier for each object. |
-| `type` | String | Some types of Telegram InlineQueryResult: _document, article, photo_. |
-| `source` | String | Source of the object: _web, text, instagram, youtube, telegram_. |
+| `type` | String | Some types of Telegram InlineQueryResult. _document, article, photo_. |
+| `source` | String | Source of the object. _web, text, instagram, youtube, telegram_. |
 | `title` | String | Title displayed on suggestions. |
 | `description` | String | Description displayed on suggestions. |
-| `keywords` | String | Normalized keywords to make it easier to search objects. |
-| `input_date` | String | Date and time when this object was saved. |
-| `input_user` | String | Telegram _id_ of the user who saved this object. |
+| `keywords` | String | **Normalized** keywords to make it easier to search objects. |
+| `input_date` | String | Date and time when this object was saved. _Automatic._ |
+| `input_user` | String | Telegram _id_ of the user who saved this object. _Automatic._ |
 | `url` | String | Telegram _file_id_ or URL of the article, post or video. |
-| `thumb_url` | String | URL of the thumbnail image displayed on suggestions. _Empty only when source is telegram_. |
+| `thumb_url` | String | URL of the thumbnail image, displayed on suggestions. _Empty only when source is telegram_. |
 | `photo_width` | Number | Width of the original image. _Required only when type is photo and source is web_. |
 | `photo_height` | Number | Height of the original image. _Required only when type is photo and source is web_. |
+
 
 ### Example of JSON file:
 
