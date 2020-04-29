@@ -1,4 +1,4 @@
-/* Script for scheduled and maintenance tasks. */
+/* Maintenance and scheduled tasks. */
 
 function taskScheduler(){
   // Register triggers for this Google WebApp, based on time rules.
@@ -13,7 +13,7 @@ tasks.changeGroupPermissions = function(activate){
   var msg = 'Chat cerrado, ¡a descansar! y nos leemos por la mañana.😎\n<b>Les dejo el instructivo básico para que no se olviden de leerlo.</b> 😘';
   if (activate) msg = '¡Buenos días ayunadores! 🙌\n<b>Ahora les dejo escribir normalmente en el chat.</b> 😘';
   var perms = {
-    'chat_id': kety.novatos_chat_id,
+    'chat_id': kety.chat_id.novatos,
     'permissions': {
       'can_send_messages': activate,
       'can_send_media_messages': activate,
@@ -25,21 +25,21 @@ tasks.changeGroupPermissions = function(activate){
       'can_pin_messages': false,
     }
   };
-  var response = kety.sendResponse('setChatPermissions', perms);
+  var response = bot.sendResponse('setChatPermissions', perms);
   if (!activate){
     var reply = {
-      'chat_id': kety.novatos_chat_id,
-      'document': 'BQACAgEAAxkBAAO6XqEOEN6oOvDToTYi1yDkhfNXr_cAApQAA4OeCUWuPO1I4rSwzhgE',
+      'chat_id': kety.chat_id.novatos,
+      'document': 'BQACAgEAAxkBAAIBDl6nXeoetP9_zIGan-trb9ihvg0xAAJIAQAC74ZBRX9dgxJs-sUEGQQ',
     };
-    var response = kety.sendResponse('sendDocument', reply);
+    var response = bot.sendResponse('sendDocument', reply);
   }
   var reply = {
-    'chat_id': kety.novatos_chat_id,
+    'chat_id': kety.chat_id.novatos,
     'text': msg,
     'parse_mode': 'HTML',
     'disable_web_page_preview': true,
   };
-  var response = kety.sendResponse('sendMessage', reply);
+  var response = bot.sendResponse('sendMessage', reply);
 }
 
 function activatePermissions(){
