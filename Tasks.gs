@@ -1,7 +1,7 @@
 /* Maintenance and scheduled tasks. */
 
-function taskScheduler(){
-  // Register triggers for this Google WebApp, based on time rules.
+function novatosScheduler(){
+  // Register triggers of novatos chat for this Google WebApp, based on time rules.
   ScriptApp.newTrigger('blockPermissions').timeBased().everyDays(1).atHour(0).nearMinute(5).create();
   ScriptApp.newTrigger('activatePermissions').timeBased().everyDays(1).atHour(9).nearMinute(15).create();
 }
@@ -48,4 +48,30 @@ function activatePermissions(){
 
 function blockPermissions(){
   tasks.changeGroupPermissions(false);
+}
+
+function liveScheduler(){
+  // Register triggers of live promotion for this Google WebApp, based on time rules.
+  ScriptApp.newTrigger('promoteJesuLive').timeBased().onMonthDay(30).atHour(18).nearMinute(15).create();
+  ScriptApp.newTrigger('promoteJesuLive').timeBased().onMonthDay(30).atHour(20).nearMinute(30).create();
+  ScriptApp.newTrigger('promoteJesuLive').timeBased().onMonthDay(30).atHour(22).nearMinute(0).create();
+  ScriptApp.newTrigger('promoteJesuLive').timeBased().onMonthDay(31).atHour(11).nearMinute(0).create();
+  ScriptApp.newTrigger('promoteJesuLive').timeBased().onMonthDay(31).atHour(12).nearMinute(30).create();
+  ScriptApp.newTrigger('promoteJesuLive').timeBased().onMonthDay(31).atHour(14).nearMinute(0).create();
+}
+function promoteJesuLive(){
+  // Send message to promote Jesu Instagram live
+  var msg = 'Recuerden que mañana Domingo 31 a las 16 hrs nuestra amiga nutri Jesu hará un live en Instagram, ¡No se lo pierdan! 😘';
+  var reply = {
+    'chat_id': kety.chat_id.novatos,
+    'text': msg,
+    'parse_mode': 'HTML',
+    'disable_web_page_preview': true,
+  };
+  var response = bot.sendResponse('sendMessage', reply);
+  var reply = {
+    'chat_id': kety.chat_id.novatos,
+    'video': 'BAACAgEAAxkBAAIBJF7SwolqzkstosLscG8aHq5cEofRAALOAANKIJlGtB1uHln9VqEZBA',
+  };
+  var response = bot.sendResponse('sendVideo', reply);
 }
