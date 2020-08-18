@@ -3,6 +3,7 @@
 Programming code in Google Apps Scripts (GAS) for **Kety**, the [Telegram Bot](https://t.me/lowcarbchilebot) of **[Low Carb Chile](https://www.lowcarbchile.com)** foundation and community.
 
 Kety is an interactive virtual assistant to help you with frequently asked questions and search information about keto and low carb within Telegram chats and groups, for now it only does inline searches suggesting web articles, YouTube videos, Instagram posts and documents or images inside Telegram.
+Also Kety performs some maintenance in Telegram groups, like opening and closing them at specific hours and sending useful messages.
 
 It started using a Google Spreadsheet as searching library but we reached a timeout limitation for Telegram Bot API and the queries were super slow, so we decided to use a JSON file in Google Drive instead.
 

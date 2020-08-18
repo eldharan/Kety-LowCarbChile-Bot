@@ -8,6 +8,7 @@ kety.telegram_url = 'https://api.telegram.org/bot' + kety.telegram_token + '/';
 
 kety.chat_id = {};
 kety.chat_id.novatos = '-Novatos-Group-Chat-ID';
+kety.chat_id.primer = '-First-Month-Group-Chat-ID';
 kety.chat_id.fr = 'User-Chat-ID';
 
 kety.ss = SpreadsheetApp.openById('Your-Sheet-ID');
