@@ -21,6 +21,9 @@ function doPost(obj){
         bot.unknownCommand(text, data);
       }
     }
+    /* else {
+       bot.saveLog('Mensaje X', '', data);
+    } */
   }
 }
 
@@ -93,6 +96,7 @@ bot.serializedResult = function(tmp){
       obj.photo_file_id = tmp.url;
       obj.caption = tmp.title;
       obj.parse_mode = 'Markdown';
+      //obj.thumb_url = tmp.url;
     }
     if (tmp.source == 'web'){
       obj.photo_url = tmp.url;
@@ -100,6 +104,12 @@ bot.serializedResult = function(tmp){
       obj.photo_width = tmp.photo_width;
       obj.photo_height = tmp.photo_photo_height;
     }
+  }
+  if (tmp.type == 'video'){
+    obj.video_file_id = tmp.url;
+    obj.caption = tmp.title;
+    obj.parse_mode = 'Markdown';
+    //obj.thumb_url = tmp.thumb_url;
   }
   return obj;
 }
@@ -186,3 +196,39 @@ bot.startMsg = function(data){
   };
   var response = bot.sendResponse('sendMessage', reply);
 }
+
+/*
+function fixLibrary(){
+  bot.readLibrary();
+  var links = [];
+  var skip = [115, 116, 117, 119, 121, 123, 124, 126, 127, 129, 136, 141, 142, 143, ];
+  kety.links[122].title = 'LAS BAYAS SON FRUTAS BEBÉS';
+  kety.links[125].title = 'Testimonio #35: Como plus, he bajado 22 kilos';
+  kety.links[128].title = 'LA FIBRA NO ES ESENCIAL NI NECESARIA';
+  kety.links[130].title = 'Cómo alcanzar una cetosis óptima';
+  kety.links[131].title = 'Prueba por ti mismo';
+  kety.links[132].title = '¿Qué es una alimentación baja en carbohidratos?';
+  kety.links[134].title = '¿La grasa saturada me tapará las arterias y causará un infarto?';
+  kety.links[135].title = '¿El cerebro necesita carbohidratos?';
+  kety.links[137].title = 'Efecto Whoosh';
+  kety.links[139].title = 'No tener nada en tu plato también es opción!';
+  kety.links[140].title = 'Nuestras reglas de oro';
+  
+  kety.links[144].title = 'Ansiedad, como controlarla';
+  kety.links[145].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  kety.links[146].title = '';
+  for (var i = 0; i < kety.links.length; i++){
+    if (!skip.includes(i)) links.push(kety.links[i]);
+  }
+  kety.links = links
+  //kety.links.splice(26, 0, tmp);
+  bot.saveLibrary();
+}
+*/
