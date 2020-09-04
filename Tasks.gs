@@ -57,20 +57,21 @@ function blockPermissions(){
   tasks.changeGroupPermissions(false);
 }
 
-function liveScheduler(){
-  // Register triggers of live promotion for this Google WebApp, based on time rules.
-  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(3).atHour(15).nearMinute(0).create();
-  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(3).atHour(17).nearMinute(30).create();
-  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(3).atHour(20).nearMinute(0).create();
-  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(10).nearMinute(0).create();
-  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(12).nearMinute(30).create();
+function pollScheduler(){
+  // Register triggers of forward poll promotion for this Google WebApp, based on time rules.
+  ScriptApp.newTrigger('fwdPoll').timeBased().everyDays(1).atHour(9).nearMinute(30).create();
+  ScriptApp.newTrigger('fwdPoll').timeBased().everyDays(1).atHour(12).nearMinute(30).create();
+  ScriptApp.newTrigger('fwdPoll').timeBased().everyDays(1).atHour(15).nearMinute(30).create();
+  ScriptApp.newTrigger('fwdPoll').timeBased().everyDays(1).atHour(18).nearMinute(30).create();
+  ScriptApp.newTrigger('fwdPoll').timeBased().everyDays(1).atHour(21).nearMinute(30).create();
+  /*ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(12).nearMinute(30).create();
   ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(15).nearMinute(0).create();
   ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(17).nearMinute(30).create();
-  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(20).nearMinute(0).create();
+  ScriptApp.newTrigger('promoteChangeHour').timeBased().onMonthDay(4).atHour(20).nearMinute(0).create();*/
 }
 function promoteChangeHour(){
   // Send message to promote Jesu Instagram live
-  var msg = 'Lo siento @Jesu por haber cerrado el chat mientras explicabas, aún no soy tan inteligente como para darme cuenta y haberlo prevenido. 🙈🙏';
+  var msg = 'Ahora ya no será necesario que nos envíen fotos de todos sus platos, pero nos tienen que demostrar que estudian y han aprendido a mejorar su salud. ¡Les haremos prueba! 👀😎';
   var reply = {
     'chat_id': kety.chat_id.novatos,
     'text': msg,
@@ -83,5 +84,13 @@ function promoteChangeHour(){
     'video': 'BAACAgEAAxkBAAIBJF7SwolqzkstosLscG8aHq5cEofRAALOAANKIJlGtB1uHln9VqEZBA',
   };
   var response = bot.sendResponse('sendVideo', reply); */
+}
+function fwdPoll(){
+  var reply = {
+    'chat_id': kety.chat_id.novatos,
+    'from_chat_id': kety.chat_id.novatos,
+    'message_id': 102459,
+  };
+  var response = bot.sendResponse('forwardMessage', reply);
 }
 
