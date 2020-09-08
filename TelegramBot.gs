@@ -11,11 +11,12 @@ function doPost(obj){
       var text = data.message.text;
       if (/^\/?start ?/i.test(text)){
         bot.startMsg(data);
+        // TODO: Crear comando "repeat" o "repetir" con un message ID o URL para repetir encuestas o mensajes específicos en el chat de novatos o primer mes
+        // TODO: Responder memes como imágenes: palmitos, falmitof, te he fallado, longas, donación, Diego (también el la búsqueda inline como meme, memes)
         // TODO: Crear comando de preguntas básicas o sugerencias, ej: "Porque te llamas Kety? R: Kety... de ¿qué te importa?", "Puedo consumir sal? cuánta?"
-        // TODO: Responder memes como imágenes: palmitos, falmitof, te he fallado, longas, donación
         // TODO: Crear comando para guardar un artículo o post con la info necesaria
-        // TODO: Crear comando para leer los datos de una entrada y botones para modificarla
         // TODO: Programar una tarea que haga fetch a los posts de IG oficial, IG de Josefina, Blog, Youtube
+        // TODO: Crear comando para leer los datos de una entrada y botones para modificarla
       }
       else {
         bot.unknownCommand(text, data);

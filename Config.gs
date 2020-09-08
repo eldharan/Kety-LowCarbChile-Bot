@@ -18,3 +18,7 @@ kety.inlogs = kety.ss.getSheetByName('Inline-Logs-Sheet-Name');
 kety.json_file_id = 'Your-JSON-File-Drive-ID';
 kety.links = [];
 
+kety.fwd_msg = {}
+kety.fwd_msg.novatos = 99999;
+kety.fwd_msg.primer = null;
+
