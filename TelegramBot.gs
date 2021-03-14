@@ -198,9 +198,13 @@ bot.startMsg = function(data){
   var response = bot.sendResponse('sendMessage', reply);
 }
 
-/*
+
 function fixLibrary(){
   bot.readLibrary();
+  kety.links[0].url = "BQACAgEAAxkBAAIBlmApwzchDmgTttqcYuYVVH6Bnq-yAAIOAQACrF8wRWSg8re9iWX2HgQ";
+  kety.links[0].input_date = '2020-02-14 21:53';
+  console.log(kety.links[0]);
+  /*
   var links = [];
   var skip = [115, 116, 117, 119, 121, 123, 124, 126, 127, 129, 136, 141, 142, 143, ];
   kety.links[122].title = 'LAS BAYAS SON FRUTAS BEBÉS';
@@ -230,6 +234,7 @@ function fixLibrary(){
   }
   kety.links = links
   //kety.links.splice(26, 0, tmp);
+  */
   bot.saveLibrary();
 }
-*/
+

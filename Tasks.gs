@@ -35,6 +35,8 @@ tasks.changeGroupPermissions = function(activate){
   var response = bot.sendResponse('setChatPermissions', perms);
   perms.chat_id = kety.chat_id.primer;
   var response = bot.sendResponse('setChatPermissions', perms);
+  perms.chat_id = kety.chat_id.ayunadores;
+  var response = bot.sendResponse('setChatPermissions', perms);
   if (!activate){
     bot.readLibrary();
     var dcmnt = {
@@ -43,6 +45,8 @@ tasks.changeGroupPermissions = function(activate){
     };
     var response = bot.sendResponse('sendDocument', dcmnt);
     dcmnt.chat_id = kety.chat_id.primer;
+    var response = bot.sendResponse('sendDocument', dcmnt);
+    dcmnt.chat_id = kety.chat_id.ayunadores;
     var response = bot.sendResponse('sendDocument', dcmnt);
   }
   var msg = 'Chat cerrado, ¡a descansar! y nos leemos por la mañana.😎\n<b>Les dejo el instructivo básico para que no se olviden de leerlo.</b> 😘';
@@ -55,6 +59,8 @@ tasks.changeGroupPermissions = function(activate){
   };
   var response = bot.sendResponse('sendMessage', reply);
   reply.chat_id = kety.chat_id.primer;
+  var response = bot.sendResponse('sendMessage', reply);
+  reply.chat_id = kety.chat_id.ayunadores;
   var response = bot.sendResponse('sendMessage', reply);
 }
 
@@ -77,6 +83,7 @@ function blockPermissions(){
 }
 
 function forwardMessagesRepeat(){
+  if (kety.fwd_msg.ayunadores) tasks.forwardMessage('ayunadores');
   if (kety.fwd_msg.novatos) tasks.forwardMessage('novatos');
   if (kety.fwd_msg.primer) tasks.forwardMessage('primer');
 }
