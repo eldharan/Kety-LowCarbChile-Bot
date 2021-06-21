@@ -2,8 +2,8 @@
 
 function permissionScheduler(){
   // Register triggers to change permissions, based on time rules.
-  ScriptApp.newTrigger('blockPermissions').timeBased().everyDays(1).atHour(22).nearMinute(5).create();
-  ScriptApp.newTrigger('activatePermissions').timeBased().everyDays(1).atHour(8).nearMinute(50).create();
+  ScriptApp.newTrigger('blockPermissions').timeBased().everyDays(1).atHour(22).nearMinute(15).create();
+  ScriptApp.newTrigger('activatePermissions').timeBased().everyDays(1).atHour(8).nearMinute(20).create();
 }
 
 function repeaterScheduler(){
@@ -38,7 +38,7 @@ tasks.changeGroupPermissions = function(activate){
         }
       };
       var response = bot.sendResponse('setChatPermissions', perms);
-      var msg = '¡Buenos días ayunadores! 🙌\n<b>Ahora les dejo escribir normalmente en el chat.</b> 😘';
+      var msg = '<b>¡Buenos días! Ahora les dejo escribir normalmente en el chat.</b> 🙌😘';
       // Send document for closing
       if (!activate){
         msg = 'Chat cerrado, ¡a descansar! y nos leemos por la mañana.😎\n<b>Les dejo el instructivo básico para que no se olviden de leerlo.</b> 😘';
