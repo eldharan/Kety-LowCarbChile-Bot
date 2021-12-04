@@ -20,9 +20,10 @@ var tasks = {};
 
 tasks.changeGroupPermissions = function(activate){
   // Function to change Group Permissions using activate parameter.
+  var is_weekday_today = new Date().getDay(); // 0 is sunday -> 6 is saturday
   bot.readLibrary();
   for (var i = 0, total = kety.chats.length; i < total; i++){
-    if (kety.chats[i].open){
+    if (kety.chats[i].open && (is_weekday_today || kety.chats[i].sunday)){
       // Change permissions
       var perms = {
         'chat_id': kety.chats[i].chat_id,
