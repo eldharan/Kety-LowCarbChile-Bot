@@ -2,7 +2,7 @@
 
 function permissionScheduler(){
   // Register triggers to change permissions, based on time rules.
-  ScriptApp.newTrigger('blockPermissions').timeBased().everyDays(1).atHour(22).nearMinute(15).create();
+  ScriptApp.newTrigger('blockPermissions').timeBased().everyDays(1).atHour(21).nearMinute(05).create();
   ScriptApp.newTrigger('activatePermissions').timeBased().everyDays(1).atHour(8).nearMinute(20).create();
 }
 
