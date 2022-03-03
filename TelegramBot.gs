@@ -204,8 +204,8 @@ bot.startMsg = function(data){
 function fixLibrary(){
   // Update JSON file with links, change first document url with Telegram file_id
   bot.readLibrary();
-  kety.links[0].url = "BQACAgEAAxkBAAIB22EtHWqvMuk3FESdblYCqV-UqljhAAIUAgACLlBBRXrspPJ3QgebIAQ";
-  kety.links[0].input_date = '2021-08-26 17:45';
+  kety.links[0].url = "BQACAgEAAxkBAAIVm2IgqTnkUW3UOZoxQdUmRJmC1LOAAAIKAgAC6ZHoRPfijcP1ZCSyIwQ";
+  kety.links[0].input_date = '2022-03-02 8:45';
   console.log(kety.links[0]);
   /*
   var links = [];
@@ -251,7 +251,7 @@ function testDocumentFile(){
   var response = bot.sendResponse('sendDocument', dcmt);
   var reply = {
     'chat_id': kety.chats[0].chat_id,
-    'text': 'Hola a todos, actualizamos el instructivo básico, les dejo la última versión para que no se olviden de leerlo.',
+    'text': 'Hola a todos, este un mensaje de prueba con la última versión del instructivo básico, no se olviden de leerlo. 😘',
     'parse_mode': 'HTML',
     'disable_web_page_preview': true,
   };
